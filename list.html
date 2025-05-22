@@ -67,19 +67,22 @@
       };
 
       fetch("https://script.google.com/macros/s/AKfycbx6zqjFd0IXa2ce6mNz84Gq1BRvtRy53jNegzs5F40H2x7drx4M6mbEUnBYSAH2QRku-Q/exec", {
-        method: "POST",
-        body: JSON.stringify(formData),
-        headers: {
-          "Content-Type": "application/json"
-        }
-      })
-      .then(response => response.text())
-      .then(data => {
-        alert("Submitted successfully!");
-        form.reset();
-      })
-      .catch(error => {
-        alert("Error: " + error);
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json"
+  },
+  body: JSON.stringify({
+    name: document.getElementById("name").value,
+    brand: document.getElementById("brand").value,
+    condition: document.getElementById("condition").value,
+    photo: document.getElementById("photo").value,
+    owner: document.getElementById("owner").value,
+    contact: document.getElementById("contact").value
+  })
+})
+.then(response => response.text())
+.then(data => console.log("Response:", data))
+.catch(error => console.error("Error:", error));
       });
     });
   </script>
