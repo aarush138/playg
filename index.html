@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>PLAY G° - Home</title>
 
   <!-- Bootswatch Vapor Theme -->
@@ -12,12 +12,14 @@
   <script src="https://unpkg.com/gsap@3.11.5/dist/gsap.min.js"></script>
 
   <style>
-    html, body {
-      margin: 0;
-      padding: 0;
+    html {
+      scroll-behavior: smooth;
+    }
+    body {
       background: #0f0f0f;
       color: #e0f7fa;
       overflow-x: hidden;
+      position: relative;
     }
 
     #particles-js {
@@ -27,6 +29,78 @@
       z-index: -1;
     }
 
+    .text-info.glow {
+      animation: glow 1.5s ease-in-out infinite alternate;
+    }
+
+    @keyframes glow {
+      from { text-shadow: 0 0 5px #00ffff, 0 0 10px #00ffff; }
+      to   { text-shadow: 0 0 20px #00ffff, 0 0 30px #00ffff; }
+    }
+
+    .team-box, .img-fluid {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    .team-container {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+      margin-top: 20px;
+    }
+
+    .team-box {
+      background-color: #222;
+      padding: 15px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 255, 204, 0.3);
+      text-align: center;
+      width: 180px;
+      transition: transform 0.3s ease;
+    }
+
+    .team-box:hover {
+      transform: scale(1.1);
+    }
+
+    .team-box a {
+      color: #00ffcc;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .gallery-container {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .img-fluid {
+      width: 250px;
+      border-radius: 15px;
+      box-shadow: 0 0 10px rgba(0, 255, 204, 0.3);
+      transition: transform 0.3s ease-in-out, opacity 1s ease-out;
+      animation: float 3s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    .parallax {
+      background-image: url('https://images.unsplash.com/photo-1521412644187-c49fa049e84d');
+      min-height: 300px;
+      background-attachment: fixed;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+
+    /* Entry Dive Animation */
     #entry-animation {
       position: fixed;
       top: 0; left: 0;
@@ -36,6 +110,7 @@
       justify-content: center;
       align-items: center;
       z-index: 9999;
+      transition: opacity 2s ease;
     }
 
     #entry-text {
@@ -44,28 +119,6 @@
       text-shadow: 0 0 20px #00ffee;
       opacity: 0;
       transform: scale(0.8);
-    }
-
-    .img-fluid {
-      width: 250px;
-      border-radius: 15px;
-      box-shadow: 0 0 10px rgba(0, 255, 204, 0.3);
-      animation: float 3s ease-in-out infinite;
-      margin: 10px;
-    }
-
-    @keyframes float {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-10px); }
-    }
-
-    .glow {
-      animation: glow 1.5s ease-in-out infinite alternate;
-    }
-
-    @keyframes glow {
-      from { text-shadow: 0 0 5px #00ffff, 0 0 10px #00ffff; }
-      to   { text-shadow: 0 0 20px #00ffff, 0 0 30px #00ffff; }
     }
   </style>
 </head>
@@ -76,42 +129,126 @@
     <h1 id="entry-text">Descending into PLAY G°...</h1>
   </div>
 
-  <!-- Particles Background -->
+  <!-- Background Particles -->
   <div id="particles-js"></div>
 
-  <!-- Main Content -->
-  <div class="container text-center mt-5 pt-5">
-    <h1 class="text-info glow">Rent. Play. Repeat.</h1>
-    <p class="lead">Empowering youth through accessible sports gear.</p>
-    <a href="https://www.instagram.com/playgofficial/" class="btn btn-info btn-lg mt-3">Join the Movement</a>
-
-    <div class="my-5">
-      <h2 class="text-info">Gallery</h2>
-      <div class="d-flex justify-content-center flex-wrap">
-        <img src="https://via.placeholder.com/250x150.png?text=1" class="img-fluid">
-        <img src="https://via.placeholder.com/250x150.png?text=2" class="img-fluid">
-        <img src="https://via.placeholder.com/250x150.png?text=3" class="img-fluid">
-        <img src="https://via.placeholder.com/250x150.png?text=4" class="img-fluid">
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+      <a class="navbar-brand" href="#">PLAY G°</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="#team">Team</a></li>
+          <li class="nav-item"><a class="nav-link" href="#gallery">Gallery</a></li>
+          <li class="nav-item"><a class="nav-link" href="list.html">List Equipment</a></li>
+          <li class="nav-item"><a class="nav-link" href="rent.html">Rent Equipment</a></li>
+          <li class="nav-item"><a class="nav-link" href="https://www.instagram.com/playgofficial/" target="_blank">Join</a></li>
+        </ul>
       </div>
     </div>
-  </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <header class="container text-center my-5" data-aos="zoom-in">
+    <h1 class="display-3 text-info glow">Rent. Play. Repeat.</h1>
+    <p class="lead">Empowering youth through accessible sports gear.</p>
+    <a href="https://www.instagram.com/playgofficial/" class="btn btn-info btn-lg mt-3">Join the Movement</a>
+  </header>
+
+  <!-- Parallax Banner -->
+  <div class="parallax my-5"></div>
+
+  <!-- About Section -->
+  <section class="container my-5" id="about" data-aos="fade-up">
+    <h2 class="text-info">About PLAY G°</h2>
+    <p>
+      PLAY-G˚ is a youth-driven platform built to transform the way people access and share sports equipment in their communities.
+      Born out of the realization that many children and teenagers miss out on the joy of playing simply because they don't own the right gear,
+      PLAY-G˚ provides a smart, local solution: rent what you need, or list what you already own.
+    </p>
+    <p>
+      Whether it's a football left unused at home, a cricket bat sitting in the corner, or a pair of badminton rackets collecting dust — PLAY-G˚ allows users
+      to put their idle gear to work. Through our platform, people can easily list their equipment and start earning passive income when others in their area rent it.
+      On the flip side, anyone who wants to play but doesn't own equipment can now affordably rent it for a few hours or a day.
+    </p>
+  </section>
+
+  <!-- Team Section -->
+  <section class="container my-5" id="team" data-aos="fade-up">
+    <h2 class="text-info">The PLAY G° Team</h2>
+    <div class="team-container">
+      <div class="team-box" data-aos="flip-left"><a href="https://www.instagram.com/ohaid3333/">Ohaid Khan</a></div>
+      <div class="team-box" data-aos="flip-left"><a href="https://www.instagram.com/aarush._008/">Aarush Kumar</a></div>
+      <div class="team-box" data-aos="flip-left"><a href="https://www.instagram.com/xx._.shaurya_98631/">Shaurya</a></div>
+      <div class="team-box" data-aos="flip-left"><a href="https://www.instagram.com/my.self._rachit/">Rachit</a></div>
+      <div class="team-box" data-aos="flip-left"><a href="https://www.instagram.com/saranshkoli__/">Saransh</a></div>
+    </div>
+  </section>
+
+  <!-- Gallery Section -->
+  <section class="container my-5" id="gallery" data-aos="fade-up">
+    <h2 class="text-info">Our Journey in Frames</h2>
+    <div class="gallery-container">
+      <img src="1.png.png" alt="Post 1" class="img-fluid" data-aos="zoom-in">
+      <img src="2.png.png" alt="Post 2" class="img-fluid" data-aos="zoom-in">
+      <img src="3.png.png" alt="Post 3" class="img-fluid" data-aos="zoom-in">
+      <img src="4.png.png" alt="Post 4" class="img-fluid" data-aos="zoom-in">
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-dark text-center text-light py-4" data-aos="fade-up">
+    &copy; 2025 PLAY G° | Powered by passion, driven by play.
+  </footer>
 
   <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script>
-    // Entry animation
+    AOS.init({ once: true, duration: 1000 });
+
+    // GSAP Animations
     window.addEventListener("load", () => {
       const entry = document.getElementById("entry-animation");
       const text = document.getElementById("entry-text");
 
-      gsap.to(text, { duration: 1.5, opacity: 1, scale: 1, ease: "power2.out" });
+      // Dive text animation
+      gsap.to(text, {
+        duration: 1.5,
+        opacity: 1,
+        scale: 1,
+        ease: "power2.out"
+      });
 
+      // Hide entry overlay after delay
       setTimeout(() => {
         gsap.to(entry, {
-          duration: 1.5,
+          duration: 2,
           opacity: 0,
           onComplete: () => entry.style.display = "none"
         });
       }, 2000);
+
+      // Animate sections
+      gsap.to(".team-box", {
+        y: 0,
+        opacity: 1,
+        duration: 1,
+        stagger: 0.2,
+        ease: "power3.out"
+      });
+
+      gsap.to(".img-fluid", {
+        y: 0,
+        opacity: 1,
+        duration: 1.2,
+        stagger: 0.2,
+        ease: "back.out(1.7)"
+      });
     });
 
     // Particles.js
@@ -134,6 +271,17 @@
 </body>
 </html>
 
+   
+    
+    
+
+
+
+   
+   
+
+   
+          
     
     
 
