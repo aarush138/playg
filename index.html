@@ -8,6 +8,8 @@
   <!-- Bootswatch Vapor Theme -->
   <link href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.3/dist/vapor/bootstrap.min.css" rel="stylesheet" />
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet"/>
+  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+  <script src="https://unpkg.com/gsap@3.11.5/dist/gsap.min.js"></script>
 
   <style>
     html {
@@ -17,36 +19,47 @@
       background: #0f0f0f;
       color: #e0f7fa;
       overflow-x: hidden;
-    }
-    .nav-link, .team-box a, .btn-info {
-      transition: color 0.3s ease, text-shadow 0.3s ease;
-    }
-    .nav-link:hover, .team-box a:hover, .btn-info:hover {
-      color: #fff !important;
-      text-shadow: 0 0 8px #00ffcc, 0 0 12px #00ffcc, 0 0 20px #00ffcc;
-    }
-    .btn-info {
       position: relative;
-      overflow: hidden;
     }
-    .btn-info::after {
-      content: "";
+
+    /* Particles */
+    #particles-js {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      z-index: -1;
+    }
+
+    .floating-objects img {
       position: absolute;
-      width: 100px;
-      height: 100px;
-      background: rgba(255,255,255,0.3);
-      display: block;
-      border-radius: 50%;
-      transform: scale(0);
+      width: 80px;
+      opacity: 0.2;
+      animation: float-obj 6s infinite ease-in-out;
+    }
+
+    .basketball { top: 20%; left: 10%; }
+    .cricketball { bottom: 10%; right: 5%; }
+    .bat { top: 50%; right: 20%; }
+
+    @keyframes float-obj {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-30px) rotate(10deg); }
+    }
+
+    .text-info.glow {
+      animation: glow 1.5s ease-in-out infinite alternate;
+    }
+
+    @keyframes glow {
+      from { text-shadow: 0 0 5px #00ffff, 0 0 10px #00ffff; }
+      to   { text-shadow: 0 0 20px #00ffff, 0 0 30px #00ffff; }
+    }
+
+    .team-box, .img-fluid {
       opacity: 0;
-      transition: transform 0.5s, opacity 1s;
-      pointer-events: none;
+      transform: translateY(20px);
     }
-    .btn-info:active::after {
-      transform: scale(4);
-      opacity: 1;
-      transition: 0s;
-    }
+
     .team-container {
       display: flex;
       justify-content: center;
@@ -54,6 +67,7 @@
       flex-wrap: wrap;
       margin-top: 20px;
     }
+
     .team-box {
       background-color: #222;
       padding: 15px;
@@ -63,20 +77,24 @@
       width: 180px;
       transition: transform 0.3s ease;
     }
+
     .team-box:hover {
       transform: scale(1.1);
     }
+
     .team-box a {
       color: #00ffcc;
       text-decoration: none;
       font-weight: bold;
     }
+
     .gallery-container {
       display: flex;
       justify-content: center;
       gap: 15px;
       flex-wrap: wrap;
     }
+
     .img-fluid {
       width: 250px;
       border-radius: 15px;
@@ -84,10 +102,12 @@
       transition: transform 0.3s ease-in-out, opacity 1s ease-out;
       animation: float 3s ease-in-out infinite;
     }
+
     @keyframes float {
       0%, 100% { transform: translateY(0); }
       50% { transform: translateY(-10px); }
     }
+
     .parallax {
       background-image: url('https://images.unsplash.com/photo-1521412644187-c49fa049e84d');
       min-height: 300px;
@@ -98,7 +118,18 @@
     }
   </style>
 </head>
+
 <body>
+  <!-- Background Particles -->
+  <div id="particles-js"></div>
+
+  <!-- Floating Objects -->
+  <div class="floating-objects">
+    <img src="images/basketball.png" class="basketball" alt="Basketball">
+    <img src="images/cricketball.png" class="cricketball" alt="Cricket Ball">
+    <img src="images/bat.png" class="bat" alt="Bat">
+  </div>
+
   <!-- Navbar -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
@@ -121,7 +152,7 @@
 
   <!-- Hero Section -->
   <header class="container text-center my-5" data-aos="zoom-in">
-    <h1 class="display-3 text-info">Rent. Play. Repeat.</h1>
+    <h1 class="display-3 text-info glow">Rent. Play. Repeat.</h1>
     <p class="lead">Empowering youth through accessible sports gear.</p>
     <a href="https://www.instagram.com/playgofficial/" class="btn btn-info btn-lg mt-3">Join the Movement</a>
   </header>
@@ -172,11 +203,52 @@
     &copy; 2025 PLAY G° | Powered by passion, driven by play.
   </footer>
 
-  <!-- Bootstrap & AOS Scripts -->
+  <!-- Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script>
     AOS.init({ once: true, duration: 1000 });
+
+    // GSAP Entrance Animations
+    window.onload = () => {
+      gsap.to(".team-box", {
+        y: 0,
+        opacity: 1,
+        duration: 1,
+        stagger: 0.2,
+        ease: "power3.out"
+      });
+
+      gsap.to(".img-fluid", {
+        y: 0,
+        opacity: 1,
+        duration: 1.2,
+        stagger: 0.2,
+        ease: "back.out(1.7)"
+      });
+    };
+
+    // Particles.js
+    particlesJS("particles-js", {
+      particles: {
+        number: { value: 60 },
+        size: { value: 3 },
+        move: { speed: 1 },
+        color: { value: "#00ffee" },
+        line_linked: {
+          enable: true,
+          distance: 150,
+          color: "#00ffff",
+          opacity: 0.3,
+          width: 1
+        }
+      }
+    });
   </script>
 </body>
 </html>
+
+  
+ 
+ 
+    
