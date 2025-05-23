@@ -7,6 +7,54 @@
   <link href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.3/dist/vapor/bootstrap.min.css" rel="stylesheet" />
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet"/>
   <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      scroll-behavior: smooth;
+    }
+
+    .parallax {
+      background-image: url('https://upload.wikimedia.org/wikipedia/commons/7/7a/Basketball.png');
+      height: 300px;
+      background-attachment: fixed;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: contain;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .parallax h2 {
+      font-size: 3rem;
+      color: #00ffcc;
+      background-color: rgba(0,0,0,0.7);
+      padding: 10px 20px;
+      border-radius: 8px;
+      animation: fadeInDown 2s ease;
+    }
+
+    @keyframes fadeInDown {
+      0% { opacity: 0; transform: translateY(-30px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    .small-icons {
+      text-align: center;
+      margin-top: 30px;
+    }
+
+    .small-icons img {
+      width: 50px;
+      margin: 10px;
+      animation: floatIcon 3s ease-in-out infinite;
+    }
+
+    @keyframes floatIcon {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
     .nav-link, .team-box a, .btn-info {
       transition: color 0.3s ease, text-shadow 0.3s ease;
     }
@@ -77,6 +125,17 @@
     </div>
   </nav>
 
+  <div class="parallax">
+    <h2>Sports Made Simple</h2>
+  </div>
+
+  <div class="small-icons">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/3/3f/Red_cricket_ball.jpg" alt="ball">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/7/77/Tennis_Racket_and_Balls.jpg" alt="tennis">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/7/7a/Basketball.png" alt="basketball">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/1/13/Badminton_Racket_and_Shuttlecock.jpg" alt="shuttle">
+  </div>
+
   <header class="container text-center my-5">
     <h1 class="display-3 text-info">Rent. Play. Repeat.</h1>
     <p class="lead" data-aos="fade-up">Empowering youth through accessible sports gear.</p>
@@ -117,4 +176,3 @@
   </script>
 </body>
 </html>
-
