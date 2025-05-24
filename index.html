@@ -4,8 +4,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>PLAY G˚ - Home</title>
+  
+  <!-- Bootswatch Vapor Theme -->
   <link href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.3/dist/vapor/bootstrap.min.css" rel="stylesheet">
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  
+  <!-- GSAP Animation Library -->
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.11.5/dist/gsap.min.js"></script>
+
   <style>
     /* Loader */
     #loader {
@@ -30,33 +36,66 @@
       align-items: center;
       gap: 10px;
     }
-      .basketball {
-       width: 40px;
-       height: 40px;
-       background-image: url('basketball.png'); /* Local file */
-       background-size: contain;
-       background-repeat: no-repeat;
-       animation: spin 1.2s linear infinite;
-       display: inline-block;
+    /* Basketball (Local Image) – Ensure basketball.png is in the same folder */
+    .basketball {
+      width: 40px;
+      height: 40px;
+      background-image: url('basketball.png');
+      background-size: contain;
+      background-repeat: no-repeat;
+      animation: spin 1.2s linear infinite;
+      display: inline-block;
     }
     .loader-bar {
       margin-top: 20px;
       width: 200px;
       height: 8px;
       border-radius: 4px;
-      background: rgba(255,255,255,0.2);
+      background: rgba(255, 255, 255, 0.2);
       overflow: hidden;
     }
     .loader-bar-fill {
       height: 100%;
-      background: #00ffee;
+      background: linear-gradient(90deg, #00ffee, #0ff);
       width: 0;
       animation: loadbar 2.8s ease forwards;
     }
-    @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-    @keyframes loadbar { 0% { width: 0; } 100% { width: 100%; } }
+    @keyframes spin { 
+      from { transform: rotate(0deg); } 
+      to { transform: rotate(360deg); } 
+    }
+    @keyframes loadbar { 
+      0% { width: 0; } 
+      100% { width: 100%; } 
+    }
 
-    /* Team Styling */
+    /* Navbar, Hero, About, Team, and Gallery common styling (as before) */
+
+    /* Hero Section & Join Button */
+    header .join-button {
+      margin-top: 20px;
+      padding: 10px 25px;
+      font-size: 1.2rem;
+      background-color: #00ffee;
+      color: #0b0c0f;
+      border: none;
+      border-radius: 5px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      display: inline-block;
+    }
+    header .join-button:hover {
+      animation: bounce 0.4s;
+      box-shadow: 0 0 10px #00ffee, 0 0 20px #00ffee;
+      transform: scale(1.05);
+    }
+    @keyframes bounce {
+      0%, 100% { transform: scale(1.1); }
+      50% { transform: scale(1.2); }
+    }
+
+    /* Team Section Styling */
     .team-container {
       display: flex;
       flex-wrap: wrap;
@@ -82,9 +121,15 @@
       color: #0ff;
       font-weight: bold;
     }
-    @keyframes bounce {
-      0%, 100% { transform: scale(1.1); }
-      50% { transform: scale(1.2); }
+
+    /* Gallery Image Effects */
+    .gallery-image {
+      width: 250px;
+      border-radius: 12px;
+      transition: transform 0.3s ease;
+    }
+    .gallery-image:hover {
+      transform: scale(1.05);
     }
   </style>
 </head>
@@ -92,17 +137,12 @@
   <!-- Loading Screen -->
   <div id="loader">
     <div class="loader-text">Sp<span class="basketball"></span>rts Made Simple</div>
-    <div class="loader-bar"><div class="loader-bar-fill"></div></div>
+    <div class="loader-bar">
+      <div class="loader-bar-fill"></div>
+    </div>
   </div>
 
-  <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      setTimeout(function () {
-        document.getElementById('loader').style.display = 'none';
-      }, 3000);
-    });
-  </script>
-
+  <!-- Main Content -->
   <!-- Navbar -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
@@ -121,20 +161,21 @@
   </nav>
 
   <!-- Hero Section -->
-  <header class="container text-center my-5">
+  <header class="container text-center my-5" data-aos="fade-up">
     <h1 class="display-3 text-info">Rent. Play. Repeat.</h1>
     <p class="lead">Empowering youth through accessible sports gear.</p>
+    <a href="https://ig.me/j/Abb7Uq_NujZyRAqo" target="_blank" class="join-button">Join The Movement</a>
   </header>
 
   <!-- About Section -->
-  <section class="container my-5" id="about">
+  <section class="container my-5" id="about" data-aos="fade-up">
     <h2 class="text-info">About PLAY G°</h2>
     <p>PLAY-G˚ is a youth-driven platform built to transform the way people access and share sports equipment in their communities. Born out of the realization that many children and teenagers miss out on the joy of playing simply because they don't own the right gear, PLAY-G˚ provides a smart, local solution: rent what you need, or list what you already own.</p>
     <p>Whether it's a football left unused at home, a cricket bat sitting in the corner, or a pair of badminton rackets collecting dust — PLAY-G˚ allows users to put their idle gear to work. Through our platform, people can easily list their equipment and start earning passive income when others in their area rent it. On the flip side, anyone who wants to play but doesn't own equipment can now affordably rent it for a few hours or a day.</p>
   </section>
 
   <!-- Team Section -->
-  <section class="container my-5" id="team">
+  <section class="container my-5" id="team" data-aos="fade-up">
     <h2 class="text-info">The PLAY G° Team</h2>
     <div class="team-container">
       <div class="team-box"><a href="https://www.instagram.com/ohaid3333/">Ohaid Khan</a></div>
@@ -146,19 +187,37 @@
   </section>
 
   <!-- Gallery Section -->
-  <section class="container my-5" id="gallery">
+  <section class="container my-5" id="gallery" data-aos="fade-up">
     <h2 class="text-info">Our Journey in Frames</h2>
     <div class="d-flex justify-content-center gap-3">
-      <img src="1.png.png" alt="Post 1" class="img-fluid" style="width:250px; border-radius:12px;">
-      <img src="2.png.png" alt="Post 2" class="img-fluid" style="width:250px; border-radius:12px;">
+      <img src="1.png.png" alt="Post 1" class="img-fluid gallery-image">
+      <img src="2.png.png" alt="Post 2" class="img-fluid gallery-image">
     </div>
   </section>
 
-  <footer class="bg-dark text-center text-light py-4">
+  <!-- Footer -->
+  <footer class="bg-dark text-center text-light py-4" data-aos="fade-up">
     &copy; 2025 PLAY G° | Powered by passion, driven by play.
   </footer>
 
+  <!-- Scripts -->
+  <script>
+    // When the window loads, animate the loader using GSAP.
+    window.addEventListener('load', function() {
+      gsap.to('#loader', {
+        duration: 1,
+        opacity: 0,
+        scale: 0.8,
+        ease: "power2.out",
+        onComplete: function() {
+          document.getElementById('loader').style.display = 'none';
+        }
+      });
+    });
+  </script>
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-  <script>AOS.init();</script>
+  <script>
+    AOS.init({ once: true, duration: 1000 });
+  </script>
 </body>
 </html>
